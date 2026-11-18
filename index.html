@@ -541,6 +541,112 @@ body{padding-top:var(--topH,60px)}
 .icRow{display:flex;gap:6px;align-items:center;flex-wrap:nowrap;margin-left:auto}
 @media (max-width:700px){.icRow{margin-left:0;width:100%}}
 
+
+/* ============================================================
+   V6 · LAPISAN WALKER, PERINGATAN PESISIR, ALARM, ANALISIS
+   ============================================================ */
+
+/* walker tidak boleh menutupi kartu / simulasi */
+.walker{z-index:1}
+main,.card,.kpi,.tblWrap,#mapCard,.slrBox{position:relative}
+main{z-index:2}
+.card,.kpi{z-index:3}
+#coastCard{background:linear-gradient(165deg,rgba(12,21,38,.99),rgba(7,13,24,.99));z-index:4}
+@media (max-width:900px){.walker{opacity:.2!important}}
+
+/* ---------- tombol alarm ---------- */
+.alarmBtn{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 10px;border-radius:10px;cursor:pointer;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#ffd9e2;
+  border:1px solid rgba(255,93,143,.45);background:linear-gradient(150deg,rgba(255,93,143,.2),rgba(255,93,143,.08))}
+.alarmBtn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.9}
+.alarmBtn.off{color:#8ea6c4;border-color:rgba(140,180,235,.24);background:rgba(10,18,32,.8)}
+.alarmBtn:active{transform:scale(.96)}
+.alarmBtn.ring{animation:alarmRing .7s ease}
+@keyframes alarmRing{0%,100%{transform:rotate(0)}20%{transform:rotate(-12deg)}40%{transform:rotate(11deg)}60%{transform:rotate(-7deg)}80%{transform:rotate(4deg)}}
+
+/* ---------- banner peringatan ---------- */
+.alertBar{display:none;align-items:center;gap:10px;margin-top:12px;padding:11px 13px;border-radius:13px;
+  border:1px solid rgba(255,206,107,.4);background:linear-gradient(120deg,rgba(255,206,107,.14),rgba(255,93,143,.08));
+  font-size:12.6px;color:#ffe9c9}
+.alertBar.on{display:flex;animation:alertIn .45s cubic-bezier(.22,1,.36,1)}
+.alertBar.r{border-color:rgba(255,93,143,.55);background:linear-gradient(120deg,rgba(255,93,143,.2),rgba(255,93,143,.06));color:#ffdbe5}
+.alertBar .dt{width:9px;height:9px;border-radius:50%;background:#ffce6b;flex:0 0 auto;box-shadow:0 0 0 0 rgba(255,206,107,.7);animation:pulseDot 1.8s infinite}
+.alertBar.r .dt{background:#ff5d8f;box-shadow:0 0 0 0 rgba(255,93,143,.7)}
+.alertBar b{color:#fff}
+@keyframes alertIn{from{opacity:0;transform:translateY(-7px)}to{opacity:1;transform:none}}
+@keyframes pulseDot{0%{box-shadow:0 0 0 0 rgba(255,206,107,.6)}70%{box-shadow:0 0 0 11px rgba(255,206,107,0)}100%{box-shadow:0 0 0 0 rgba(255,206,107,0)}}
+
+/* ---------- legenda peta ---------- */
+.mapLegend{position:absolute;left:12px;bottom:96px;z-index:420;display:flex;flex-direction:column;gap:5px;
+  padding:9px 11px;border-radius:12px;border:1px solid rgba(120,190,255,.22);
+  background:linear-gradient(160deg,rgba(8,15,27,.92),rgba(5,10,19,.94));backdrop-filter:blur(10px);font-size:10.8px;color:#b7cde4}
+.mapLegend b{font-size:9.6px;letter-spacing:.14em;text-transform:uppercase;color:#8fa8c6;margin-bottom:2px}
+.mapLegend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
+.mapLegend .lg{display:flex;align-items:center;gap:2px}
+.mapLegend .lg em{font-style:normal;color:#7f97b5;margin-left:4px;font-size:10px}
+
+/* ---------- popup peta ---------- */
+.leaflet-popup-content-wrapper{background:linear-gradient(165deg,#0d1829,#070e1a);color:#dceafb;border:1px solid rgba(120,190,255,.28);
+  border-radius:14px;box-shadow:0 26px 60px -30px #000}
+.leaflet-popup-tip{background:#0a1424;border:1px solid rgba(120,190,255,.24)}
+.leaflet-popup-content{margin:12px 14px;font-size:12.4px;line-height:1.6}
+.pop b.hd{display:block;font-size:13.6px;color:#fff;letter-spacing:.01em;margin-bottom:2px}
+.pop .badge{display:inline-block;padding:2px 9px;border-radius:99px;font-family:var(--mono);font-size:10px;
+  letter-spacing:.1em;text-transform:uppercase;margin:6px 0 8px}
+.pop .badge.g{background:rgba(46,230,168,.16);color:#7cf9b0;border:1px solid rgba(46,230,168,.4)}
+.pop .badge.y{background:rgba(255,206,107,.16);color:#ffce6b;border:1px solid rgba(255,206,107,.45)}
+.pop .badge.r{background:rgba(255,93,143,.16);color:#ff9ab7;border:1px solid rgba(255,93,143,.5)}
+.pop .row{display:flex;justify-content:space-between;gap:12px;color:#a9c0dc;font-size:11.6px}
+.pop .row b{color:#e9f4ff;font-family:var(--mono)}
+.pop .sec{margin-top:9px;padding-top:8px;border-top:1px dashed rgba(120,190,255,.2)}
+.pop .sec h6{margin:0 0 4px;font-size:9.8px;letter-spacing:.14em;text-transform:uppercase;color:#7fd8f5}
+.pop ul{margin:0;padding-left:15px}
+.pop ul li{margin:2px 0;font-size:11.6px;color:#c6d8ea}
+.pop .kes{margin-top:8px;font-size:11.6px;color:#fff;background:rgba(56,232,255,.09);border-left:2px solid #38e8ff;padding:6px 9px;border-radius:0 8px 8px 0}
+
+/* ---------- kartu analisis dampak ---------- */
+.anGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0 4px}
+@media (max-width:700px){.anGrid{grid-template-columns:1fr}}
+.anTile{border:1px solid rgba(140,180,235,.16);border-radius:14px;padding:11px 12px;background:rgba(9,16,29,.72)}
+.anTile b{display:block;font-family:var(--mono);font-size:22px;line-height:1.1}
+.anTile span{display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#8fa8c6;margin-top:3px}
+.anTile.g b{color:#7cf9b0}.anTile.y b{color:#ffce6b}.anTile.r b{color:#ff9ab7}
+.anRow{display:flex;align-items:center;gap:9px;margin:7px 0;font-size:12.2px;color:#bfd4ea}
+.anRow .nm{flex:0 0 auto;min-width:96px}
+.anRow .bar{flex:1;height:7px;border-radius:99px;background:rgba(140,180,235,.14);overflow:hidden}
+.anRow .bar i{display:block;height:100%;width:0;border-radius:99px;transition:width .6s cubic-bezier(.22,1,.36,1)}
+.anRow em{font-style:normal;font-family:var(--mono);font-size:10.6px;color:#93aacb;min-width:52px;text-align:right}
+.anSec{margin-top:14px;padding-top:12px;border-top:1px solid rgba(120,190,255,.14)}
+.anSec h4{margin:0 0 7px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#7fd8f5}
+.anSec ul{margin:0;padding-left:17px;color:#c2d6ea;font-size:12.4px;line-height:1.75}
+.anSec li{margin:3px 0}
+.anSec p{margin:0;color:#b9cde3;font-size:12.4px;line-height:1.8}
+.anKes{margin-top:10px;padding:10px 12px;border-radius:12px;border-left:3px solid #38e8ff;
+  background:linear-gradient(120deg,rgba(56,232,255,.1),rgba(56,232,255,.02));color:#eaf7ff;font-size:12.6px;line-height:1.7}
+
+/* ============================================================
+   V7 · KARTU KACA TRANSPARAN — figur berjalan terlihat di belakang
+   ============================================================ */
+.kpi{
+  background:linear-gradient(160deg,rgba(12,21,38,.42),rgba(7,12,23,.28))!important;
+  -webkit-backdrop-filter:blur(3px) saturate(125%);backdrop-filter:blur(3px) saturate(125%);
+  border-color:rgba(140,190,240,.20)!important}
+.kpi b{text-shadow:0 2px 14px rgba(2,6,12,.85)}
+.kpi span,.kpi em{text-shadow:0 1px 10px rgba(2,6,12,.9)}
+#coastCard{
+  background:linear-gradient(160deg,rgba(11,19,34,.40),rgba(6,11,22,.30))!important;
+  -webkit-backdrop-filter:blur(4px) saturate(120%);backdrop-filter:blur(4px) saturate(120%);
+  border-color:rgba(140,190,240,.20)!important}
+#coastCard h3,#coastCard .sub,#coastCard .note{text-shadow:0 1px 10px rgba(2,6,12,.9)}
+#coastCard #coastList>div>span{text-shadow:0 1px 8px rgba(2,6,12,.95)}
+#coastCard .pill{box-shadow:0 4px 14px -8px #000}
+#coastCard #coastList{
+  background:linear-gradient(100deg,rgba(4,9,17,.70) 0%,rgba(4,9,17,.34) 52%,rgba(4,9,17,.06) 100%);
+  border-radius:11px;padding:7px 9px;margin:2px 0 8px}
+@media (max-width:900px){
+  .kpi{background:linear-gradient(160deg,rgba(12,21,38,.62),rgba(7,12,23,.5))!important}
+  #coastCard{background:linear-gradient(160deg,rgba(11,19,34,.60),rgba(6,11,22,.52))!important}
+}
 </style>
 </head>
 <body class="locked">
@@ -610,12 +716,26 @@ body{padding-top:var(--topH,60px)}
         <button class="mChip on" data-layer="risiko">Risiko Pesisir</button>
         <button class="mChip" data-layer="suhu">Suhu Kota</button>
         <button class="mChip" data-layer="hutan">Titik Hutan</button>
+        <button class="alarmBtn on" id="alarmBtn" type="button" aria-pressed="true" title="Alarm peringatan otomatis">
+          <svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 1 0-12 0c0 7-2 8-2 8h16s-2-1-2-8"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+          <b id="alarmTxt">Alarm</b>
+        </button>
       </div>
       <div id="map"></div>
         <div id="windyBox" aria-hidden="true">
           <div class="wbHead"><b>Radar Windy · Suhu Indonesia</b><span id="wbNote">Sumber: Windy.com</span><button id="wbClose" type="button" aria-label="Tutup radar">&#10005;</button></div>
           <iframe id="windyFrame" title="Radar cuaca Windy" loading="lazy" allowfullscreen></iframe>
         </div>
+      <div class="mapLegend" id="mapLegend">
+        <b>Legenda status</b>
+        <div class="lg" title="Aman: genangan simulasi masih di bawah 60% elevasi kota"><i style="background:#2ee6a8"></i>Aman <em>&lt; 60% elevasi</em></div>
+        <div class="lg" title="Rentan: genangan mencapai 60-99% elevasi kota, perlu mitigasi"><i style="background:#ffce6b"></i>Rentan <em>60-99%</em></div>
+        <div class="lg" title="Terdampak: genangan menyamai atau melewati elevasi kota"><i style="background:#ff5d8f"></i>Terdampak <em>&ge; elevasi</em></div>
+      </div>
+      <div class="alertBar" id="alertBar" role="status" aria-live="polite">
+        <span class="dt"></span>
+        <div id="alertTxt"></div>
+      </div>
       <div id="mapWarn">Peta satelit butuh koneksi internet. Data, grafik, dan simulasi tetap berjalan offline.</div>
       <div id="mapFallback">Peta memerlukan koneksi internet. Semua data dan analisis tetap berjalan tanpa peta.</div>
       <div class="slrBox">
@@ -626,12 +746,30 @@ body{padding-top:var(--topH,60px)}
       <p class="note">Titik peta menunjukkan kota pemantauan. Naikkan simulasi muka laut untuk melihat kota pesisir yang terdampak.</p>
     </div>
 
-    <div class="card">
+    <div class="card" id="coastCard">
       <h3>Status pesisir</h3>
       <div class="sub">Tinggi genangan simulasi vs elevasi kota</div>
       <div id="coastList" style="display:flex;flex-direction:column;gap:7px;max-height:290px;overflow:auto"></div>
       <div class="note">Elevasi kota bersifat indikatif (rata-rata pusat kota).</div>
     </div>
+  </div>
+
+  <div class="card" id="analisisCard" style="margin-top:14px">
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <h3 style="margin:0">Analisis Dampak Pesisir</h3>
+      <span class="pill g" id="anState" style="font-size:10px">siap</span>
+      <span style="margin-left:auto;font-family:var(--mono);font-size:11px;color:#7fd8f5" id="anTime">simulasi 0 cm</span>
+    </div>
+    <div class="sub">Otomatis tersinkron dengan slider simulasi muka laut · metode genangan statis dibandingkan elevasi kota</div>
+    <div class="anGrid">
+      <div class="anTile g"><b id="anAman">0</b><span>Kota aman</span></div>
+      <div class="anTile y"><b id="anRentan">0</b><span>Rentan</span></div>
+      <div class="anTile r"><b id="anDampak">0</b><span>Terdampak</span></div>
+    </div>
+    <div id="anBars"></div>
+    <div class="anSec"><h4>Saran teknis</h4><ul id="anSaran"></ul></div>
+    <div class="anSec"><h4>Risalah teknis</h4><p id="anRisalah"></p></div>
+    <div class="anKes" id="anKes"></div>
   </div>
 
   <div class="card" style="margin-top:14px">
@@ -1215,7 +1353,9 @@ function drawMarkers(){
     }).addTo(map);
     var tv = temps[c.n] != null ? temps[c.n] : c.clim;
     var t = rf(tv, 1) + ' °C' + (live ? ' (live)' : ' (normal)');
-    m.bindPopup('<div class="pop"><b>' + c.n + '</b>Elevasi ' + rf(c.el, 1) + ' m · ' + rf(c.pop, 2) + ' jt jiwa<br>Suhu sekarang: <b>' + t + '</b><br>Status pesisir: ' + st.t + '</div>');
+    m.bindPopup((window.popHTML ? window.popHTML(c, t) : ('<div class="pop"><b class="hd">' + c.n + '</b>' + st.t + '</div>')), { maxWidth: 320, className: 'popWrap' });
+    m.bindTooltip(c.n + ' · ' + st.t + ' (' + Math.round(ratio(c) * 100) + '% elevasi)', { direction: 'top', offset: [0, -6] });
+    (window.cityMarker = window.cityMarker || {})[c.n] = m;
     m.on('click', function(){ m.openPopup(); });
     markers.push(m);
   });
@@ -1237,6 +1377,7 @@ function setSlr(v){
   if (va) va.textContent = slrCm + ' cm';
   if (vb) vb.textContent = slrCm + ' cm';
   renderCoast(); drawMarkers(); renderLautTable();
+  if (typeof window.coastalSync === 'function') window.coastalSync();
 }
 function renderCoast(){
   var box = document.getElementById('coastList');
@@ -2167,6 +2308,214 @@ window.BUMI = { hitung: hitung, setSK: setSK, setSlr: setSlr, activate: activate
   setTimeout(m, 400); setTimeout(m, 1500);
 })();
 
+/* ============================================================
+   V6 · PERINGATAN PESISIR, ALARM, ANALISIS DAMPAK
+   ============================================================ */
+var cityMarker = window.cityMarker = window.cityMarker || {};
+var lastStatus = {};
+var ALARM_KEY = 'bumi_alarm';
+var alarmOn = true;
+try{ alarmOn = localStorage.getItem(ALARM_KEY) !== '0'; }catch(e){}
+
+var REC = {
+  y: [
+    'Tinggikan tanggul atau revetmen 0,8-1,2 m di atas elevasi genangan rencana.',
+    'Normalisasi dan pompanisasi drainase kawasan (debit hujan + rob).',
+    'Tetapkan zona lindung genangan: batasi izin bangunan baru di area di bawah 1 m.',
+    'Perkuat sistem peringatan dini rob, jalur evakuasi, dan papan informasi tinggi muka air.'
+  ],
+  r: [
+    'Relokasi bertahap permukiman pada elevasi di bawah tinggi genangan simulasi.',
+    'Bangun tanggul laut dan stasiun pompa berkapasitas tinggi, lengkap dengan kolam retensi.',
+    'Rehabilitasi mangrove dan green belt pesisir sebagai peredam gelombang serta penahan sedimentasi.',
+    'Tinggikan dan lindungi infrastruktur kritis: jalan, jaringan air bersih, dan gardu listrik.'
+  ],
+  g: [
+    'Pertahankan kondisi saat ini dan lanjutkan pemantauan muka air tanah serta amblesan.',
+    'Jaga ruang terbuka hijau dan sumur resapan untuk memperlambat limpasan.',
+    'Siapkan rencana kontingensi sederhana bila tren muka laut terus naik.'
+  ]
+};
+
+function ratio(c){ return Math.max(0, (slrCm / 100) / Math.max(0.3, c.el)); }
+
+function popHTML(c, tempTxt){
+  var st = statusOf(c), cls = st.k, rec = REC[cls] || REC.g;
+  var pend = c.pop >= 1 ? rf(c.pop, 1) + ' juta jiwa' : Math.round(c.pop * 1000) + ' ribu jiwa';
+  var kes = cls === 'r'
+    ? 'Kota ' + c.n + ' memerlukan tindakan struktural dan relokasi bertahap; penundaan menambah kerugian.'
+    : cls === 'y'
+      ? 'Kota ' + c.n + ' berstatus waspada; mitigasi harus dimulai sebelum genangan melewati elevasi kota.'
+      : 'Kota ' + c.n + ' masih aman pada skenario ' + slrCm + ' cm; pemantauan berkala tetap diperlukan.';
+  var risalah = 'Genangan simulasi ' + rf(slrCm / 100, 2) + ' m dibandingkan terhadap elevasi rata-rata pusat kota '
+    + rf(c.el, 1) + ' m (' + Math.round(ratio(c) * 100) + '% elevasi). Penduduk terpapar ' + pend
+    + '. Ambang: rentan pada 60-99% elevasi, terdampak saat genangan sama atau melewati elevasi.';
+  return '<div class="pop">'
+    + '<b class="hd">' + c.n + '</b>'
+    + '<span class="badge ' + cls + '">' + st.t + '</span>'
+    + '<div class="row"><span>Genangan simulasi</span><b>' + rf(slrCm / 100, 2) + ' m</b></div>'
+    + '<div class="row"><span>Elevasi kota</span><b>' + rf(c.el, 1) + ' m</b></div>'
+    + '<div class="row"><span>Rasio genangan</span><b>' + Math.round(ratio(c) * 100) + '%</b></div>'
+    + '<div class="row"><span>Suhu kota</span><b>' + tempTxt + '</b></div>'
+    + '<div class="sec"><h6>Saran teknis</h6><ul>' + rec.slice(0, 3).map(function(x){ return '<li>' + x + '</li>'; }).join('') + '</ul></div>'
+    + '<div class="sec"><h6>Risalah teknis</h6><span style="font-size:11.6px;color:#b9cde3">' + risalah + '</span></div>'
+    + '<div class="kes">' + kes + '</div>'
+    + '</div>';
+}
+
+/* ---- alarm ---- */
+var AC = null;
+function alarmBeep(critical){
+  if (!alarmOn) return;
+  try{
+    AC = AC || new (window.AudioContext || window.webkitAudioContext)();
+    if (AC.state === 'suspended') AC.resume();
+    var t0 = AC.currentTime + .02;
+    var seq = critical ? [0, .19, .38, .57] : [0, .21];
+    seq.forEach(function(off, i){
+      var o = AC.createOscillator(), g = AC.createGain();
+      o.type = 'sine';
+      o.frequency.value = critical ? (i % 2 ? 900 : 680) : 760;
+      g.gain.setValueAtTime(.0001, t0 + off);
+      g.gain.exponentialRampToValueAtTime(critical ? .2 : .12, t0 + off + .02);
+      g.gain.exponentialRampToValueAtTime(.0001, t0 + off + .17);
+      o.connect(g); g.connect(AC.destination);
+      o.start(t0 + off); o.stop(t0 + off + .19);
+    });
+  }catch(e){}
+  try{ if (navigator.vibrate) navigator.vibrate(critical ? [90, 60, 90] : 55); }catch(e){}
+  var b = document.getElementById('alarmBtn');
+  if (b){ b.classList.remove('ring'); void b.offsetWidth; b.classList.add('ring'); }
+}
+
+function paintAlarm(){
+  var b = document.getElementById('alarmBtn'), t = document.getElementById('alarmTxt');
+  if (!b) return;
+  b.classList.toggle('on', alarmOn);
+  b.classList.toggle('off', !alarmOn);
+  b.setAttribute('aria-pressed', alarmOn ? 'true' : 'false');
+  if (t) t.textContent = alarmOn ? 'Alarm ON' : 'Alarm OFF';
+  b.title = alarmOn ? 'Alarm peringatan: aktif (klik untuk mematikan)' : 'Alarm peringatan: nonaktif (klik untuk menyalakan)';
+}
+
+/* ---- peringatan ---- */
+function syncCoastal(){
+  var esc = [];
+  CITIES.forEach(function(c){
+    var k = statusOf(c).k, pv = lastStatus[c.n];
+    if (pv && ((k === 'r' && pv !== 'r') || (k === 'y' && pv === 'g'))) esc.push(c);
+    lastStatus[c.n] = k;
+  });
+  renderAlert(esc);
+  renderAnalisis();
+  if (esc.length && layerMode === 'risiko'){
+    alarmBeep(esc.some(function(c){ return statusOf(c).k === 'r'; }));
+    var worst = esc.slice().sort(function(a, b){ return b.pop - a.pop; })[0];
+    var mk = cityMarker[worst.n];
+    if (mk && map){ try{ mk.openPopup(); }catch(e){} }
+  }
+}
+
+function renderAlert(esc){
+  var bar = document.getElementById('alertBar'), txt = document.getElementById('alertTxt');
+  if (!bar || !txt) return;
+  var dampak = CITIES.filter(function(c){ return statusOf(c).k === 'r'; });
+  var rentan = CITIES.filter(function(c){ return statusOf(c).k === 'y'; });
+  if (!dampak.length && !rentan.length){
+    bar.className = 'alertBar';
+    txt.innerHTML = '';
+    return;
+  }
+  bar.className = 'alertBar on' + (dampak.length ? ' r' : '');
+  var nm = function (arr){ return arr.map(function(c){ return '<b>' + c.n + '</b>'; }).join(', '); };
+  txt.innerHTML = (dampak.length
+      ? 'Peringatan: genangan ' + rf(slrCm / 100, 2) + ' m membuat ' + dampak.length + ' kota <b>terdampak</b> — ' + nm(dampak.slice(0, 4)) + (dampak.length > 4 ? ' dan lainnya' : '') + '. '
+      : 'Waspada: genangan ' + rf(slrCm / 100, 2) + ' m, ' + rentan.length + ' kota <b>rentan</b> — ' + nm(rentan.slice(0, 4)) + '. ')
+    + (esc && esc.length ? '<i style="font-style:normal;color:#9beeff"> Status berubah: ' + nm(esc) + '.</i>' : '');
+}
+
+function renderAnalisis(){
+  var dampak = CITIES.filter(function(c){ return statusOf(c).k === 'r'; });
+  var rentan = CITIES.filter(function(c){ return statusOf(c).k === 'y'; });
+  var aman = CITIES.length - dampak.length - rentan.length;
+  var set = function(id, v){ var e = document.getElementById(id); if (e) e.textContent = v; };
+  set('anAman', aman); set('anRentan', rentan.length); set('anDampak', dampak.length);
+  var tm = document.getElementById('anTime'); if (tm) tm.textContent = 'simulasi ' + slrCm + ' cm';
+  var stEl = document.getElementById('anState');
+  if (stEl){
+    stEl.className = 'pill ' + (dampak.length ? 'r' : rentan.length ? 'y' : 'g');
+    stEl.textContent = dampak.length ? 'siaga' : rentan.length ? 'waspada' : 'aman';
+  }
+
+  var top = CITIES.slice().sort(function(a, b){ return ratio(b) - ratio(a); }).slice(0, 5);
+  var bars = document.getElementById('anBars');
+  if (bars){
+    bars.innerHTML = top.map(function(c){
+      var st = statusOf(c), pct = Math.min(100, Math.round(ratio(c) * 100));
+      var col = st.k === 'r' ? 'linear-gradient(90deg,#ff5d8f,#ff9ab7)' : st.k === 'y' ? 'linear-gradient(90deg,#ffce6b,#ffe6a8)' : 'linear-gradient(90deg,#2ee6a8,#7cf9b0)';
+      return '<div class="anRow"><span class="nm">' + c.n + '</span>'
+        + '<span class="bar"><i style="width:' + pct + '%;background:' + col + '"></i></span>'
+        + '<em>' + pct + '%</em></div>';
+    }).join('');
+  }
+
+  var lvl = dampak.length ? 'r' : rentan.length ? 'y' : 'g';
+  var saran = document.getElementById('anSaran');
+  if (saran) saran.innerHTML = (REC[lvl] || REC.g).map(function(x){ return '<li>' + x + '</li>'; }).join('');
+
+  var popTerpapar = dampak.reduce(function(a, c){ return a + c.pop; }, 0)
+    + rentan.reduce(function(a, c){ return a + c.pop * .5; }, 0);
+  var ris = document.getElementById('anRisalah');
+  if (ris){
+    ris.innerHTML = 'Pada skenario genangan <b>' + rf(slrCm / 100, 2) + ' m</b>, '
+      + dampak.length + ' kota berstatus terdampak dan ' + rentan.length + ' kota rentan dari ' + CITIES.length
+      + ' kota pemantauan. Perkiraan penduduk terpapar (tertimbang) sekitar <b>' + rf(popTerpapar, 1) + ' juta jiwa</b>. '
+      + 'Analisis memakai pendekatan genangan statis terhadap elevasi rata-rata pusat kota; '
+      + 'kota dinyatakan rentan pada 60-99% elevasi dan terdampak saat genangan sama atau melewati elevasi. '
+      + 'Hasil ini bersifat indikatif untuk prioritas kebijakan, bukan pengganti kajian hidrodinamika detail.';
+  }
+  var kes = document.getElementById('anKes');
+  if (kes){
+    kes.textContent = dampak.length
+      ? 'Kesimpulan: tanpa penanganan, ' + dampak.length + ' kota pesisir utama kehilangan fungsi kawasan pada skenario ini. Prioritaskan tanggul laut, pompanisasi, dan relokasi bertahap.'
+      : rentan.length
+        ? 'Kesimpulan: risiko masih dapat dikendalikan bila mitigasi dijalankan sekarang, terutama pada ' + rentan.length + ' kota berstatus rentan.'
+        : 'Kesimpulan: pada skenario ini seluruh kota pemantauan masih aman. Pemantauan dan kesiapan dini tetap dijaga.';
+  }
+}
+
+/* tombol alarm */
+(function(){
+  var b = document.getElementById('alarmBtn');
+  if (!b) return;
+  paintAlarm();
+  b.addEventListener('click', function(){
+    alarmOn = !alarmOn;
+    try{ localStorage.setItem(ALARM_KEY, alarmOn ? '1' : '0'); }catch(e){}
+    paintAlarm();
+    if (alarmOn) alarmBeep(false);
+    if (typeof toast === 'function') toast(alarmOn ? 'Alarm peringatan aktif' : 'Alarm peringatan dimatikan');
+  });
+})();
+
+/* publikasi + render awal */
+window.popHTML = popHTML;
+window.syncCoastal = syncCoastal;
+window.renderAlert = renderAlert;
+window.renderAnalisis = renderAnalisis;
+window.cityMarker = cityMarker;
+try{ syncCoastal(); }catch(e){}
+try{
+  var slrEl = document.getElementById('slr');
+  if (slrEl) slrEl.dispatchEvent(new Event('input', { bubbles: true }));
+}catch(e){}
+window.coastalSync = syncCoastal;
+window.coastalAlarm = function(v){
+  alarmOn = (v !== false);
+  try{ localStorage.setItem(ALARM_KEY, alarmOn ? '1' : '0'); }catch(e){}
+  paintAlarm();
+};
+
 })();
 
 /* ============================================================
@@ -2244,6 +2593,10 @@ window.BUMI = { hitung: hitung, setSK: setSK, setSlr: setSlr, activate: activate
   window.addEventListener('orientationchange', function(){ setTimeout(place, 220); });
   if (typeof ResizeObserver === 'function'){ try { new ResizeObserver(place).observe(walk); } catch(e){} }
   window.walkerToggle = function(v){ setShown(!!v, true); };
+
+
+
+
 })();
 
 </script>
